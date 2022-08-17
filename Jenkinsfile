@@ -7,7 +7,7 @@ pipeline {
         stage("Verify Branch") {
             
             steps{
-                sh(script: 'Hello World')
+                sh(script: 'echo Hello World')
             }
         }
         
