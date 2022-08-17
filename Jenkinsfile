@@ -4,25 +4,23 @@ pipeline {
     
     stages{
         
-        stage("Verify Branch") {
-            
-            steps{
-                sh(script: 'echo Hello World')
-            }
-        }
+        stage('Verify Branch') {
+         steps {
+            echo "$GIT_BRANCH"
+         }
+      }
         
-        stage("Docker Build") {
-            
-            steps{
-                sh(script: 'docker images -a')
-                sh(script: """
-                   cd azure-vote/
-                   docker images -a
-                   docker build -t jenkins-pipeline .
-                   docker images -a
-                   cd ..
-                   """)
-            }
+        stage('Docker Build') {
+         steps {
+            pwsh(script: 'docker images -a')
+            pwsh(script: """
+               cd azure-vote/
+               docker images -a
+               docker build -t jenkins-pipeline .
+               docker images -a
+               cd ..
+            """)
+         }
         }
     }
 }
