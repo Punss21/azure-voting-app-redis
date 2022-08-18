@@ -21,7 +21,7 @@ pipeline {
       }
       stage('Start test app') {
          steps {
-            sh(script: """
+            pwsh(script: """
                docker-compose up -d
                chmod -R 777 scripts/test_container.ps1
                ./scripts/test_container.ps1
