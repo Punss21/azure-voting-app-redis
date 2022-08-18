@@ -39,6 +39,7 @@ pipeline {
       stage('Run Tests') {
          steps {
             sh(script: """
+               pip install -U pytest
                pytest ./tests/test_sample.py
             """)
          }
