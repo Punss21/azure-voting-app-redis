@@ -21,10 +21,10 @@ pipeline {
       }
       stage('Start test app') {
          steps {
-            pwsh(script: """
+            sh(script: """
                docker-compose up -d
-               chmod -R 777 scripts/test_container.ps1
-               ./scripts/test_container.ps1
+               chmod -R 777 scripts/test_container.sh
+               ./scripts/test_container.sh
             """)
          }
          post {
