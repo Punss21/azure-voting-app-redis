@@ -1,9 +1,7 @@
-#!/bin/bash
-ping -c3 http://localhost:8000 > /dev/null
-if [ $? -eq 0 ]
-  then 
-    echo ok 
-    exit 0
-  else
-    echo “fail”
+# Add the -f option to curl if server errors like HTTP 404 should fail too
+TARGET=http://localhost:8000
+if curl -I "http://$TARGET"; then
+  echo "$TARGET alive and web site is up"
+else
+  echo "$TARGET offline or web server problem"
 fi
