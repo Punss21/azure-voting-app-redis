@@ -23,8 +23,8 @@ pipeline {
          steps {
             sh(script: """
                docker-compose up -d
-               chmod -R 777 scripts/test_container.sh
-               ./scripts/test_container.sh
+               chmod -R 777 /scripts/test_container.ps1
+               ./scripts/test_container.ps1
             """)
          }
          post {
@@ -52,7 +52,7 @@ pipeline {
       }
       stage('Run Anchore') {
          steps {
-            sh(script: """
+            pwsh(script: """
                Write-Output "blackdentech/jenkins-course" > anchore_images
             """)
             anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
