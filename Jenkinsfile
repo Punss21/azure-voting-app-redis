@@ -65,20 +65,20 @@ pipeline {
          }
 
       }
-      stage('Run trivy') {
-         steps{
-            sh(script: """
-               trivy punss21/jenkins-course 
-            """)
-         }
-      }
-      // stage('Run Anchore') {
-      //    steps {
-      //       pwsh(script: """
-      //          Write-Output "punss21/jenkins-course" > anchore_images
+      // stage('Run trivy') {
+      //    steps{
+      //       sh(script: """
+      //          trivy punss21/jenkins-course 
       //       """)
-      //       anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
       //    }
       // }
+      stage('Run Anchore') {
+         steps {
+            pwsh(script: """
+               Write-Output "punss21/jenkins-course" > anchore_images
+            """)
+            anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
+         }
+      }
    }
 }
