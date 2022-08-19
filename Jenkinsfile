@@ -58,7 +58,7 @@ pipeline {
                script {
                   docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
                      def image = docker.build('punss21/jenkins-course:latest')
-                     image push()
+                     image.push()
                   }
                }
             }
