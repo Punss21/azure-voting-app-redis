@@ -54,7 +54,7 @@ pipeline {
       stage('Run Anchore') {
          steps {
             pwsh(script: """
-               Write-Output "blackdentech/jenkins-course" > anchore_images
+               Write-Output "punss21/jenkins-course" > anchore_images
             """)
             anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
          }
