@@ -39,7 +39,7 @@ pipeline {
       stage('Run Tests') {
          steps {
             sh(script: """
-               pip install -U pytest
+               
                pytest ./tests/test_sample.py
             """)
          }
@@ -64,6 +64,13 @@ pipeline {
             }
          }
 
+      }
+      stage('Run trivy') {
+         steps{
+            sh(script: """
+               trivy punss21/jenkins-course 
+            """)
+         }
       }
       // stage('Run Anchore') {
       //    steps {
