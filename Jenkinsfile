@@ -51,13 +51,27 @@ pipeline {
             """)
          }
       }
-      stage('Run Anchore') {
+      stage('Push Container'){
          steps {
-            pwsh(script: """
-               Write-Output "punss21/jenkins-course" > anchore_images
-            """)
-            anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
+            echo "Workspace is : $WORKSPACE"
+            dir("$WORKSPACE/azure-vote") {
+               script {
+                  docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+                     def image = docker.build('punss21/jenkins-course:latest')
+                     image push()
+                  }
+               }
+            }
          }
+
       }
+      // stage('Run Anchore') {
+      //    steps {
+      //       pwsh(script: """
+      //          Write-Output "punss21/jenkins-course" > anchore_images
+      //       """)
+      //       anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
+      //    }
+      // }
    }
 }
