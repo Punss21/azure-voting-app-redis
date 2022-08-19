@@ -83,7 +83,7 @@ pipeline {
       // }
       stage('Run Anchore') {
          steps {
-            anchore name: 'anchore_images'
+            anchore name: "anchore_images"
          }
       }
    }
