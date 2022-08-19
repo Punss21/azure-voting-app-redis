@@ -76,6 +76,7 @@ pipeline {
          steps {
             sh(script: """
                echo "punss21/jenkins-course" > anchore_images
+               anchore name: 'anchore_images'
             """)
             anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
          }
