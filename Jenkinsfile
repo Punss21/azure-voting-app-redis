@@ -72,19 +72,38 @@ pipeline {
       //       """)
       //    }
       // }
-      stage('Run Anchore') {
-         steps {
-            sh(script: """
-               echo "punss21/jenkins-course" > anchore_images
+
+      //below code block works with exceptional handling
+      // stage('Run Anchore') {
+      //    steps {
+      //       sh(script: """
+      //          echo "punss21/jenkins-course" > anchore_images
                
-            """)
-            anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
-         }
-      }
+      //       """)
+      //       anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
+      //    }
+      // }
       // stage('Run Anchore') {
       //    steps {
       //       anchore name: "anchore_images"
       //    }
       // }
+
+      stage('Container Scanning'){
+         parallel{
+            stage('Run anchore'){
+               steps{
+                  sleep(time: 30, unit: 'SECONDS')
+               }
+
+            }
+            stage('Run trivy'){
+               steps{
+                  sleep(time: 30, unit: 'SECONDS')
+               }
+
+            }
+         }
+      }
    }
 }
